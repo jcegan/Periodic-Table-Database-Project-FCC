@@ -15,8 +15,8 @@ else
 
   if [[ $ATOMIC_NUMBER ]]
   then
-    RETRIEVE_INFO=$($PSQL "SELECT * FROM elements FULL JOIN properties ON elements.atomic_number = properties.atomic_number WHERE elements.atomic_number = $ATOMIC_NUMBER")
-    echo "$RETRIEVE_INFO" | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME ATOMIC_NUMBER TYPE ATOMIC_MASS MELTING_POINT BOILING_POINT TYPE_ID
+    RETRIEVE_INFO=$($PSQL "SELECT * FROM elements FULL JOIN properties ON elements.atomic_number = properties.atomic_number FULL JOIN types ON properties.type_id = types.type_id WHERE elements.atomic_number = $ATOMIC_NUMBER")
+    echo "$RETRIEVE_INFO" | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME ATOMIC_NUMBER ATOMIC_MASS MELTING_POINT BOILING_POINT TYPE_ID TYPE_ID TYPE
     do
       echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
     done
