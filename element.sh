@@ -8,6 +8,6 @@ else
   if [[ ! -z $ATOMIC_NUMBER ]]
   then
     echo $($PSQL "SELECT * FROM elements FULL JOIN properties ON elements(atomic_number) = properties(atomic_number) WHERE atomic_number = $ATOMIC_NUMBER") | while read ATOMIC_NUMBER BAR SYMBOL BAR NAME ATOMIC_NUMBER TYPE BAR ATOMIC_MASS BAR MELTING_POINT BAR BOILING_POINT BAR TYPE_ID
-    echo $TYPE $MELTING_POINT
+    echo "$TYPE $MELTING_POINT"
   fi
 fi
